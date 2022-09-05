@@ -19,7 +19,8 @@ This component extends the behaviour of the original button component in the des
 ## Options available 
 
 In the nunjucks macro the developer can change: 
-* The initial button text Text initially shown on click 
+* The initial button text 
+* Text initially shown on click 
 * A second version of the text once a certain number of seconds has passed
 * The number of seconds between changing the first and second message on the button 
 * Hidden text read out by screen readers before the button text, e.g. ‘Button updated to…’ 
