@@ -1,0 +1,89 @@
+@include govuk-exports("govuk/component/progress-button") {
+
+  $active-button-assembly-speed: .4s; // transform the button to allow space for the icon
+  $active-button-visibility-speed: 1s; // make the icon visible
+  $active-button-spin-speed: .8s; // speed of the spinning animation
+
+  $active-button-text-colour: govuk-colour("black", $legacy: "black");
+  $active-button-background: $govuk-focus-colour;
+  $active-button-shadow-colour: govuk-colour("black", $legacy: "black");
+  $active-button-animation-icon-colour: govuk-colour("black", $legacy: "black");
+  $active-button-animation-icon-accent-colour: rgba(0, 0, 0, .35);
+  $active-button-animation-icon-width: 3px; // using rems creates an 'unsteady' animation
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+
+    30% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .govuk-button--progress {
+    transition: background-color $active-button-assembly-speed ease-out;
+  }
+
+  .govuk-button.govuk-button--progress-active:hover {
+    color: $active-button-text-colour;
+    background-color: $active-button-background;
+    box-shadow: 0 2px 0 $active-button-shadow-colour;
+  }
+
+  .govuk-button--progress-active {
+    color: $active-button-text-colour;
+    background-color: $active-button-background;
+  }
+
+  .govuk-button--progress-active[disabled] {
+    opacity: 1;
+  }
+
+  .govuk-button--progress-active .govuk-button__icon {
+    display: inline-block;
+    position: relative;
+    padding-left: 1.9rem;
+    transition: width, padding-left $active-button-assembly-speed ease-out;
+  }
+
+  .govuk-button--progress-active .govuk-button__icon:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: -.15rem;
+    left: 0;
+    min-width: 1rem;
+    min-height: 1rem;
+    animation: fade-in $active-button-visibility-speed ease, rotate $active-button-spin-speed linear infinite;
+    border: $active-button-animation-icon-width solid $active-button-animation-icon-colour;
+    border-radius: 50%;
+    border-right-color: $active-button-animation-icon-accent-colour;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .govuk-button--progress {
+      transition: none;
+    }
+
+    .govuk-button--progress-active .govuk-button__icon:before {
+      display: none;
+      transition: none;
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+params:
+- name: initialButtonText
+  type: string
+  required: true
+- name: firstTextState
+  type: string
+  required: true
+- name: secondTextState
+  type: string
+  required: true
+- name: secondsToWaitForSecondTextState
+  type: number
+  required: true
+- name: accessibilityChangeText
+  type: string
+  required: true
+
+examples:
+- name: default
+  data:
+    initialButtonText: Continue
+    firstTextState: One moment…
+    secondTextState: Still working…
+    secondsToWaitForSecondTextState: 6
+    accessibilityChangeText: Button updated to
+
+# Hidden examples are not shown in the review app, but are used for tests and HTML fixtures
+
