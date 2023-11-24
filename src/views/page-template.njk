@@ -26,7 +26,19 @@
 #}
 
                <h1 class="govuk-heading-l">The progress button</h1>
-{% from "progress-button/macro.njk" import govukProgressButton %}
+    <h2 class="govuk-heading-m">Version 2</h2>
+    <p class="govuk-body">There is <a href="https://github.com/alphagov/di-ipv-cri-fraud-front/pull/308">a PR for the code related to this button in the fraud repo</a>.</p>
+
+    {# this button is progressively enhanced by the JavaScript code below
+    {{ hmpoSubmit(ctx, {id: "continue", attributes:{"aria-describedby":"screen-reader-status"}, html: '<span class="visual-message">'+translate("buttons.next")+'</span>' }) }}  #}
+
+
+    <button name="continue" class="govuk-button button" data-module="govuk-button" id="continue" aria-describedby="screen-reader-status" data-status-message-initial-visible="Please wait" data-status-message-update-visible="Still checking – do not close or refresh this page" data-status-message-initial-screen-reader="Please wait while we check your details" data-status-message-update-screen-reader="Still checking – do not close or refresh this page">
+        <span class="visual-message">Continue</span>
+    </button>
+
+    <h2 class="govuk-heading-m">Version 1</h2>
+{% from "progress-button-v1/macro.njk" import govukProgressButton %}
 {{ govukProgressButton({
     initialButtonText: "Continue",
     firstTextState: "One moment…",
@@ -49,4 +61,6 @@
             new ProgressButton(button).init()
         });
     </script>
+
+    <script src="/public/js/progress-button-v2.js"></script>
 {% endblock %}

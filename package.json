@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-sass": "rm -rf dist/public/stylesheets && sass --no-source-map src/assets/scss/application.scss dist/public/stylesheets/application.css --style compressed",
     "copy-assets": "rm -rf dist/public/images && rm -rf dist/public/fonts && copyfiles -f node_modules/govuk-frontend/govuk/assets/images/* dist/public/images && copyfiles -f node_modules/govuk-frontend/govuk/assets/fonts/* dist/public/fonts",
-    "build-js": "rm -rf dist/public/js/*.* && copyfiles -f node_modules/govuk-frontend/govuk/all.js dist/public/js/ && copyfiles -f src/assets/js/*.mjs dist/public/js",
-    "build-prototype": "node process-nunjucks.js && npx http-server dist"
+    "build-js": "rm -rf dist/public/js/*.* && copyfiles -f node_modules/govuk-frontend/govuk/all.js dist/public/js/ && copyfiles -f src/assets/js/*.mjs dist/public/js && copyfiles -f src/assets/js/*.js dist/public/js && copyfiles -f src/assets/images/*.svg dist/public/images",
+    "build-prototype": "node process-nunjucks.js && npx http-server dist",
+    "generate-button": "npm run build-sass && npm run copy-assets && npm run build-js && npm run build-prototype"
   },
   "repository": {
     "type": "git",
