@@ -24,9 +24,6 @@ function delayDisableButton(button, visualStatus) {
 
     button.className += " button--spinner";
 
-    console.log(button.dataset);
-    console.log(button.dataset.statusMessageInitialVisible);
-
     visualStatus.textContent = button.dataset.statusMessageInitialVisible;
     var screenReaderStatus = document.getElementById("screen-reader-status");
     screenReaderStatus.textContent = button.dataset.statusMessageInitialScreenReader;

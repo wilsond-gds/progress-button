@@ -1,66 +1,86 @@
 {% extends "govuk/template.njk" %}
 {% set assetPath = "public" %}
+{% set htmlLang = "en" %}
+
+{% block pageTitle %}Waiting button pattern – GOV.UK{% endblock %}
+
+
 {% block head %}
- <link href="/public/stylesheets/application.css" rel="stylesheet">
+  <link href="/public/stylesheets/application.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          {% from "govuk/components/accordion/macro.njk" import govukAccordion %}
 
-{% from "govuk/components/accordion/macro.njk" import govukAccordion %}
+          {#
+          {{ govukAccordion({
+            id: "accordion-default",
+            items: [
+              {
+                heading: {
+                  text: "Writing well for the web"
+                },
+                content: {
+                  html: "<p class='govuk-body'>This is the content for Writing well for the web.</p>"
+                }
+              }
+            ]
+          }) }}
+          #}
 
-{#
-{{ govukAccordion({
-  id: "accordion-default",
-  items: [
-    {
-      heading: {
-        text: "Writing well for the web"
-      },
-      content: {
-        html: "<p class='govuk-body'>This is the content for Writing well for the web.</p>"
-      }
-    }
-  ]
-}) }}
+          <h1 class="govuk-heading-l">Progress button prototypes</h1>
+          <h2 class="govuk-heading-m">Version 2</h2>
+          <p class="govuk-body">There is <a href="https://github.com/alphagov/di-ipv-cri-fraud-front/pull/308">a PR for
+              the code related to this button in the fraud repo</a>.</p>
+          <p class="govuk-body">This version still needs checking against the best practices in <a
+                href="https://adrianroselli.com/2021/01/multi-function-button.html">Adrian Roselli’s version of similar
+              behaviour</a>.</p>
 
-#}
-
-               <h1 class="govuk-heading-l">The progress button</h1>
-    <h2 class="govuk-heading-m">Version 2</h2>
-    <p class="govuk-body">There is <a href="https://github.com/alphagov/di-ipv-cri-fraud-front/pull/308">a PR for the code related to this button in the fraud repo</a>.</p>
-
-    {# this button is progressively enhanced by the JavaScript code below
+          {# this button is progressively enhanced by the JavaScript code below
     {{ hmpoSubmit(ctx, {id: "continue", attributes:{"aria-describedby":"screen-reader-status"}, html: '<span class="visual-message">'+translate("buttons.next")+'</span>' }) }}  #}
 
 
-    <button name="continue" class="govuk-button button" data-module="govuk-button" id="continue" aria-describedby="screen-reader-status" data-status-message-initial-visible="Please wait" data-status-message-update-visible="Still checking – do not close or refresh this page" data-status-message-initial-screen-reader="Please wait while we check your details" data-status-message-update-screen-reader="Still checking – do not close or refresh this page">
-        <span class="visual-message">Continue</span>
-    </button>
+          <button name="continue" class="govuk-button button" data-module="govuk-button" id="continue"
+                  aria-describedby="screen-reader-status" data-status-message-initial-visible="Please wait"
+                  data-status-message-update-visible="Still checking – do not close or refresh this page"
+                  data-status-message-initial-screen-reader="Please wait while we check your details"
+                  data-status-message-update-screen-reader="Still checking – do not close or refresh this page">
+            <span class="visual-message">Continue</span>
+          </button>
 
-    <h2 class="govuk-heading-m">Version 1</h2>
-{% from "progress-button-v1/macro.njk" import govukProgressButton %}
-{{ govukProgressButton({
-    initialButtonText: "Continue",
-    firstTextState: "One moment…",
-    secondTextState: "Still working…",
-    secondsToWaitForSecondTextState: 6,
-    accessibilityChangeText: "Button updated to"
-    })
-}}
+          <h2 class="govuk-heading-m">Version 1</h2>
+          <p class="govuk-body">Do not use this version: it’s only here to show progress.</p>
+          {% from "progress-button-v1/macro.njk" import govukProgressButton %}
+          {{ govukProgressButton({
+            initialButtonText: "Continue",
+            firstTextState: "One moment…",
+            secondTextState: "Still working…",
+            secondsToWaitForSecondTextState: 6,
+            accessibilityChangeText: "Button updated to"
+          }) }}
 
+        </div>
+      </div>
+    </main>
+  </div>
 {% endblock %}
 
 {% block bodyEnd %}
-    <script src="/public/js/all.js"></script>
+  <script src="/public/js/all.js"></script>
 
-    <script type="module">
-        window.GOVUKFrontend.initAll();
-        import ProgressButton from '/public/js/progress-button-v1.mjs'
-        const $progressButton = document.querySelectorAll('[data-module="progress-button"]');
-        $progressButton.forEach(button=>{
-            new ProgressButton(button).init()
-        });
-    </script>
+  <script type="module">
+      window.GOVUKFrontend.initAll();
+      import ProgressButton from '/public/js/progress-button-v1.mjs'
 
-    <script src="/public/js/progress-button-v2.js"></script>
+      const $progressButton = document.querySelectorAll('[data-module="progress-button"]');
+      $progressButton.forEach(button => {
+          new ProgressButton(button).init()
+      });
+  </script>
+
+  <script src="/public/js/progress-button-v2.js"></script>
 {% endblock %}
