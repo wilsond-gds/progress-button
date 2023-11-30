@@ -1,5 +1,11 @@
 # Progress button v0.1
 
+## Preview the button
+
+* Install the dependencies required with `npm install`
+* Run `npm run generate-button`
+* Go to `localhost:8080` in a web browser
+
 ## https://github.com/alphagov/di-ipv-cri-fraud-front/pull/308    
 
 ## Why is this component needed? 
